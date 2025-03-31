@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEE Quiz Results</title>
+    <link rel="stylesheet" href="style_see.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card results-summary-card">
+            <h1>Quiz Results</h1>
+            <div id="summary">
+                <p id="timeout-message" class="error-message" style="display: none;">Time ran out!</p>
+                <p>Your Score: <strong id="score">--</strong> / <strong id="total-questions">--</strong></p>
+                <p>Time Taken: <strong id="time-taken">--:--</strong></p>
+            </div>
+            <div class="button-container results-buttons">
+                 <button id="show-details" class="button button-secondary">See Full Details</button>
+            </div>
+        </div>
+
+        <div id="detailed-results" class="card detailed-results-card" style="display: none;">
+            <h2>Detailed Answers</h2>
+            <!-- Detailed question review will be loaded here by JavaScript -->
+             <p>Loading details...</p>
+        </div>
+
+         <div class="card navigation-card">
+             <div class="button-container">
+                <a href="setup_see.html" class="button button-primary">Try Again</a>
+                <a href="index.html" class="button button-secondary">Go Home</a>
+            </div>
+         </div>
+
+    </div>
+
+    <script src="questions_see.js"></script> <!-- May need questions for review -->
+    <script src="script_see.js"></script> <!-- Link to main JS -->
+</body>
+</html>
