@@ -2,67 +2,77 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEE Quiz Setup</title>
+    <!-- Changed Title -->
+    <title>SEE MCQ Quiz Setup - Quiz Platform</title>
+    <!-- Added viewport from your example -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Link shared CSS -->
     <link rel="stylesheet" href="style_see.css">
 </head>
-<body>
-    <div class="container">
-        <div class="card setup-card">
-            <h1>SEE Quiz Setup</h1>
-            <!-- Form for user input -->
-            <form id="setup-form" novalidate> <!-- novalidate prevents default browser validation, we'll use JS -->
-                <!-- Time Limit -->
-                <div class="form-group">
-                    <label for="time-limit">Set Time Limit (minutes):</label>
-                    <input type="number" id="time-limit" name="timeLimit" placeholder="Minutes (1-180)" inputmode="numeric" required>
-                    <div class="error-message" id="time-error"></div>
-                </div>
+<!-- Add a class to body specific to this page for easier CSS targeting -->
+<body class="page-setup-see">
 
-                <!-- Number of Questions -->
-                <div class="form-group">
-                    <label for="num-questions">Number of Questions:</label>
-                    <input type="number" id="num-questions" name="numQuestions" placeholder="Number (10-100)" inputmode="numeric" required>
-                    <div class="error-message" id="questions-error"></div>
-                </div>
+    <div class="setup-container"> <!-- Using new container class -->
+        <h1>SEE MCQ Practice Setup</h1>
 
-                <!-- Subject Selection -->
-                <div class="form-group">
-                    <fieldset>
-                        <legend>Select Subjects:</legend>
-                        <div class="checkbox-group">
-                             <div>
-                                <input type="checkbox" id="subject-science" name="subject" value="Science">
-                                <label for="subject-science">Science</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="subject-social" name="subject" value="Social">
-                                <label for="subject-social">Social Studies</label>
-                            </div>
-                        </div>
-                        <div class="error-message" id="subject-error"></div>
-                    </fieldset>
-                </div>
+        <!-- Use the form ID from your example, remove novalidate to allow browser validation -->
+        <form id="mcq-setup-form">
+            <h2>Configure Your Quiz</h2>
 
-                <!-- Action Buttons -->
-                <div class="button-container setup-buttons">
-                    <button type="submit" class="button button-primary">Start Quiz</button>
-                    <a href="index.html" class="button button-secondary">Back to Home</a>
+            <div class="form-group">
+                <label for="question-count">Number of Questions:</label>
+                <!-- Ensure ID matches JS, add min/max/required for browser validation -->
+                <input type="number" id="question-count" name="question_count" min="10" max="100" placeholder="Enter 10 to 100" inputmode="numeric" required>
+                <!-- Update hint text for clarity -->
+                <p class="input-hint">Value must be between 10 and 100.</p>
+            </div>
+
+            <div class="form-group">
+                <label for="time-limit">Time Limit (minutes):</label>
+                 <!-- Ensure ID matches JS, add min/max/required for browser validation -->
+                <input type="number" id="time-limit" name="time_limit" min="1" max="180" placeholder="Enter 1 to 180" inputmode="numeric" required>
+                <p class="input-hint">Set a timer from 1 minute up to 3 hours.</p>
+            </div>
+
+            <div class="form-group">
+                <label>Select Subject(s):</label>
+                <div class="subject-selection">
+                    <label>
+                        <!-- Ensure value matches what quiz_see.js expects ('Science', 'Social') -->
+                        <input type="checkbox" name="subject" value="Science"> Science
+                    </label>
+                    <label>
+                        <input type="checkbox" name="subject" value="Social"> Social Studies
+                    </label>
                 </div>
-            </form>
+                 <p class="input-hint">Check one or both subjects.</p>
+            </div>
+
+            <!-- Keep the premium notice block -->
+            <div class="premium-notice">
+                MCQ Access is a premium feature (Requires Code) - Cost: Rs. 10.<br>
+                Need the code? Please see <a href="toppersnote.html#payment-section" target="_blank" title="Opens payment info in new tab">Payment Information</a>.
+            </div>
+
+            <!-- Use the new button class -->
+            <button type="submit" class="start-button">Start Quiz!</button>
+        </form>
+
+         <!-- Keep the new Back Button -->
+        <div class="back-button-container">
+             <a href="index.html" class="back-btn">Back to Home</a>
         </div>
     </div>
 
-    <!-- Simple Pop-up Modal for General Errors (Initially Hidden) -->
-    <div id="error-popup" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close-button" id="close-popup-btn">×</span>
-            <p id="popup-message">Please correct the errors.</p>
-        </div>
+    <!-- Keep the new Popup structure for JS validation errors (like subject) -->
+    <div id="popup-overlay" class="popup-overlay"></div>
+    <div id="message-popup" class="popup">
+        <p id="popup-message-text">Validation Message</p>
     </div>
 
-    <!-- Link JavaScript files -->
+    <!-- Link JS Files (Common utilities FIRST, then page-specific logic) -->
     <script src="common_utils.js"></script>
-    <script src="setup_see.js"></script> <!-- Specific logic for this page -->
+    <script src="setup_see.js"></script>
+
 </body>
 </html>
