@@ -1,33 +1,141 @@
-/* ====== ADD OR REPLACE STYLES IN style_see.css with these ====== */
+/* ================================================== */
+/*          style_see.css (Revised & Scoped)          */
+/* ================================================== */
 
-/* --- Basic Reset & Defaults (If not already present) --- */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* --- 1. Base / Common Styles (Apply Everywhere) --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-/* Style specifically for the setup page body */
-body.page-setup-see {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8; /* Light blue-grey background */
-    color: #333;
+body { /* Base body styles */
+    font-family: Arial, sans-serif; /* Use consistent font from new design */
     line-height: 1.6;
-    padding: 20px;
-    display: flex;
+    background-color: #f0f4f8; /* Use consistent light bg from new design */
+    color: #333;
+    padding: 15px; /* Base padding */
+    display: flex; /* Use flex for centering content */
     justify-content: center;
-    align-items: flex-start; /* Align card to top */
+    align-items: flex-start;
     min-height: 100vh;
 }
 
-/* Style for the main container on setup page */
-.page-setup-see .setup-container {
-    max-width: 600px;
+/* Common container for centering content */
+.container {
+    max-width: 800px; /* Max width for quiz/results */
     width: 100%;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    padding: 25px 30px;
-    margin-top: 20px; /* Space from top */
+    margin: 15px auto;
+    padding: 0 10px; /* Padding on smaller screens */
+}
+/* Setup page has its own container with different max-width */
+.setup-container {
+     max-width: 600px;
+     width: 100%;
+     margin: 15px auto; /* Consistent margin */
 }
 
-/* Headings specific to setup page */
+
+/* Basic Card Styling (Common) */
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 25px 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e0e0e0;
+}
+/* Setup container already acts like a card, but specific cards might exist inside other pages */
+.page-setup-see .setup-container { /* Styles specific to the setup container itself */
+     background-color: #fff;
+     border-radius: 12px;
+     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+     padding: 25px 30px;
+     margin-top: 20px;
+}
+
+/* Common Button Base Styles (Structure & Transitions) */
+.button, .start-button, .back-btn {
+    display: inline-block;
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 8px;
+    font-size: 1em; /* Base font size */
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold; /* Common bold style */
+}
+.button:hover, .start-button:hover, .back-btn:hover {
+    transform: translateY(-2px); /* Common lift effect */
+}
+.button:active, .start-button:active, .back-btn:active {
+    transform: scale(0.98); /* Common click effect */
+}
+
+/* Common Button Color Variations */
+.button-primary { /* Used on quiz/results nav */
+    background-color: #007bff;
+    color: white;
+}
+.button-primary:hover { background-color: #0056b3; }
+
+.button-secondary { /* Used on quiz/results nav */
+    background-color: #6c757d;
+    color: white;
+}
+.button-secondary:hover { background-color: #5a6268; }
+
+.button-disabled { /* Used on index */
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+.button-disabled:hover { transform: none; }
+
+
+/* Common Form Group Structure (if needed beyond setup) */
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+}
+/* Input hint text (common style) */
+.input-hint {
+    font-size: 0.85rem;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Common Error Message Style (text color) */
+.error-message {
+    color: #dc3545; /* Red for errors */
+    font-size: 0.9em;
+    margin-top: 5px;
+    min-height: 1.2em; /* Prevent layout jumps */
+}
+
+/* Common Popup Styles (Overlay & Box Structure) */
+.popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease; }
+.popup-overlay.active { display: block; opacity: 1; }
+.popup { position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%) scale(0.9); background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 20px 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); z-index: 1001; display: none; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; text-align: center; font-size: 1rem; font-weight: bold;}
+.popup.active { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+
+/* --- 2. Index Page Styles --- */
+/* Add styles specific to index.html if needed, prefixed with .page-index */
+/* Example:
+.page-index .button-container {
+    flex-direction: column;
+} */
+
+
+/* --- 3. Setup Page Styles (.page-setup-see) --- */
 .page-setup-see h1 {
     text-align: center;
     color: #2a9d8f; /* Teal */
@@ -42,17 +150,6 @@ body.page-setup-see {
     border-bottom: 1px solid #eee;
     padding-bottom: 5px;
 }
-
-/* Form Styling for setup page */
-.page-setup-see .form-group {
-    margin-bottom: 20px;
-}
-.page-setup-see .form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #555;
-}
 .page-setup-see .form-group input[type="number"] {
     width: 100%;
     padding: 10px;
@@ -62,32 +159,22 @@ body.page-setup-see {
     transition: border-color 0.2s ease;
 }
 .page-setup-see .form-group input[type="number"]:focus {
-    border-color: #2a9d8f; /* Highlight on focus */
+    border-color: #2a9d8f;
     outline: none;
 }
-/* Style for invalid input using browser pseudo-class */
 .page-setup-see .form-group input[type="number"]:invalid {
-     border-color: #dc3545; /* Red border for browser validation error */
-     /* background-color: #f8d7da; */ /* Optional background */
+     border-color: #dc3545 !important; /* Ensure override */
 }
-
-.page-setup-see .input-hint {
-    font-size: 0.85rem;
-    color: #777;
-    margin-top: 5px;
-}
-
-/* Subject Selection Checkboxes Styling */
 .page-setup-see .subject-selection {
     display: flex;
-    gap: 20px; /* Space between checkboxes */
-    flex-wrap: wrap; /* Allow wrapping */
+    gap: 20px;
+    flex-wrap: wrap;
 }
 .page-setup-see .subject-selection label {
     display: flex;
     align-items: center;
     cursor: pointer;
-    font-weight: normal; /* Override bold label */
+    font-weight: normal;
     padding: 8px 12px;
     border: 1px solid #ddd;
     border-radius: 6px;
@@ -95,25 +182,23 @@ body.page-setup-see {
 }
 .page-setup-see .subject-selection input[type="checkbox"] {
     margin-right: 8px;
-    width: 18px; /* Custom size */
+    width: 18px;
     height: 18px;
-    accent-color: #2a9d8f; /* Color the checkbox */
+    accent-color: #2a9d8f;
 }
-.page-setup-see .subject-selection label:has(input:checked) { /* Style label when checked */
-     background-color: #e0f2f7; /* Light teal */
-     border-color: #2a9d8f; /* Match focus/accent color */
+.page-setup-see .subject-selection label:has(input:checked) {
+     background-color: #e0f2f7;
+     border-color: #2a9d8f;
 }
 .page-setup-see .subject-selection label:hover {
       background-color: #f8f9fa;
 }
-
-/* Premium Notice Styling */
 .page-setup-see .premium-notice {
     font-size: 0.9rem;
     text-align: center;
     margin: 25px 0 15px 0;
     padding: 10px;
-    background-color: #fff9e6; /* Light yellow */
+    background-color: #fff9e6;
     border: 1px solid #ffeebb;
     border-radius: 6px;
     color: #5e553c;
@@ -123,50 +208,337 @@ body.page-setup-see {
     font-weight: bold;
     text-decoration: none;
 }
-.page-setup-see .premium-notice a:hover {
-     text-decoration: underline;
-}
+.page-setup-see .premium-notice a:hover { text-decoration: underline; }
 
-/* Start Button Styling */
 .page-setup-see .start-button {
     display: block;
     width: 100%;
     padding: 12px;
     background-color: #e76f51; /* Orange-red */
     color: white;
-    border: none;
-    border-radius: 8px;
     font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.1s ease;
     margin-top: 20px;
+    /* Inherits base styles like radius, transitions */
 }
-.page-setup-see .start-button:hover {
-    background-color: #d85a3e; /* Darker shade */
-}
-.page-setup-see .start-button:active {
-    transform: scale(0.98); /* Click effect */
-}
+.page-setup-see .start-button:hover { background-color: #d85a3e; }
 
-/* Back Button Styling */
 .page-setup-see .back-button-container { text-align: center; margin-top: 30px; }
-.page-setup-see .back-btn { background-color: #6c757d; color: white; border: none; padding: 8px 20px; font-size: 1rem; cursor: pointer; border-radius: 6px; text-decoration: none; transition: background-color 0.3s ease; }
+.page-setup-see .back-btn {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 20px;
+    font-size: 1rem;
+     /* Inherits base styles */
+}
 .page-setup-see .back-btn:hover { background-color: #5a6268; }
 
-/* Popup for Custom Validation Errors (e.g., Subject) */
-.popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease; }
-.popup-overlay.active { display: block; opacity: 1; }
-.popup { position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%) scale(0.9); background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 20px 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); z-index: 1001; display: none; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; text-align: center; font-size: 1rem; font-weight: bold;}
-.popup.active { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+/* --- 4. Quiz Page Styles (.page-quiz-see) --- */
+.page-quiz-see .quiz-container { /* Use the main container */
+    max-width: 800px; /* Keep quiz content wider */
+}
+.page-quiz-see .quiz-header { /* Specific card styling for quiz header */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px; /* Slightly less padding */
+    margin-bottom: 20px;
+}
+.page-quiz-see .quiz-header h2 {
+    margin-bottom: 0; /* Remove margin from base h2 */
+    color: #3a607d; /* Use consistent color */
+    border-bottom: none; /* Remove border from base h2 */
+}
+.page-quiz-see .timer-container {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #dc3545; /* Red timer */
+}
+.page-quiz-see .quiz-questions-area { /* The card holding questions */
+    padding: 20px 25px;
+}
+
+.page-quiz-see .loading-message {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    padding: 30px;
+}
+
+.page-quiz-see .subject-section { /* Container for questions of one subject */
+    margin-bottom: 30px;
+}
+.page-quiz-see .subject-section:last-child {
+    margin-bottom: 10px; /* Less margin after last section */
+}
+
+.page-quiz-see .question-subject-header {
+    font-size: 1.3em;
+    color: #0056b3; /* Professional blue */
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    display: inline-block;
+}
+.page-quiz-see .quiz-question-block {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee; /* Separator */
+}
+.page-quiz-see .quiz-question-block:last-child {
+    border-bottom: none;
+    padding-bottom: 5px; /* Reduce padding for last item */
+}
+.page-quiz-see .question-text {
+    font-weight: normal; /* Override potential bolding */
+    margin-bottom: 15px;
+    font-size: 1.05em;
+    color: #333;
+}
+.page-quiz-see .question-text strong { /* Style question number */
+    font-weight: bold;
+    margin-right: 5px;
+     color: #3a607d;
+}
+
+.page-quiz-see .options-list {
+    list-style: none;
+    padding: 0;
+}
+.page-quiz-see .options-list li {
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    position: relative; /* For potential future additions */
+}
+.page-quiz-see .options-list li:hover {
+    background-color: #f0f8ff; /* Light blue on hover */
+    border-color: #cce4ff;
+}
+.page-quiz-see .options-list label { /* Label associated with radio */
+    display: block; /* Make label take full width for click */
+    cursor: pointer;
+    margin-left: 25px; /* Space for the radio button */
+    font-weight: normal;
+}
+.page-quiz-see .options-list input[type="radio"] {
+    position: absolute; /* Position radio nicely */
+    left: 12px;
+    top: 12px; /* Adjust vertical alignment */
+    margin-right: 10px; /* Keep some space */
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: #2a9d8f; /* Match setup checkbox color */
+}
+/* Style checked option */
+.page-quiz-see .options-list li:has(input:checked) {
+     background-color: #e0f2f7;
+     border-color: #2a9d8f;
+}
+
+.page-quiz-see .quiz-footer {
+    text-align: center;
+    margin-top: 10px; /* Reduced margin */
+    padding: 15px 0;
+}
+/* Use button-primary style for submit */
+.page-quiz-see #submit-quiz {
+     background-color: #e76f51; /* Match setup start button */
+     color: white;
+     padding: 12px 30px;
+     font-size: 1.1em;
+}
+.page-quiz-see #submit-quiz:hover { background-color: #d85a3e; }
+.page-quiz-see #submit-quiz:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
 
 
-/* Remove styling for old error message divs if they existed */
-/* .error-message { display: none; } */
-/* Remove styling for old popup if it existed */
-/* #error-popup { display: none; } */
-/* Remove styling for old input error class */
-/* .input-error { border-color: initial; box-shadow: none; } */
+/* --- 5. Results Page Styles (.page-results-see) --- */
+.page-results-see .results-summary-card h1 {
+    text-align: center;
+    color: #2a9d8f; /* Match setup */
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+.page-results-see #summary p {
+    font-size: 1.1em;
+    margin-bottom: 12px;
+    color: #333;
+}
+.page-results-see #summary strong {
+    color: #0056b3; /* Professional blue for results */
+    font-weight: bold;
+}
+/* Style for timeout message in summary */
+.page-results-see #summary #timeout-message {
+     font-weight: bold;
+     text-align: center;
+}
+
+/* Buttons container within summary card */
+.page-results-see .results-summary-card .results-buttons {
+    text-align: center;
+    margin-top: 25px;
+}
+/* Style "See Details" button */
+.page-results-see #show-details {
+    background-color: #6c757d; /* Use secondary color */
+    color: white;
+    padding: 10px 25px;
+}
+.page-results-see #show-details:hover { background-color: #5a6268; }
+.page-results-see #show-details:disabled {
+     background-color: #ccc;
+     cursor: not-allowed;
+     transform: none;
+}
+
+/* Detailed Results Area */
+.page-results-see .detailed-results-card {
+     /* Inherits base card styles */
+}
+.page-results-see .detailed-results-card h2 {
+     text-align: center;
+     color: #3a607d; /* Match setup */
+     font-size: 1.5rem;
+     margin-bottom: 20px;
+}
+/* Reuse quiz block structure but style differently for results */
+.page-results-see .detailed-results-card .quiz-question-block {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #ccc; /* Dashed separator */
+}
+.page-results-see .detailed-results-card .quiz-question-block:last-child {
+    border-bottom: none;
+}
+.page-results-see .detailed-results-card .question-subject-header {
+    font-size: 1.3em;
+    color: #0056b3;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    display: inline-block;
+}
+
+.page-results-see .detailed-results-card .question-text {
+    font-weight: normal;
+    margin-bottom: 15px;
+    font-size: 1.05em;
+    color: #333;
+}
+.page-results-see .detailed-results-card .question-text strong {
+    font-weight: bold;
+    margin-right: 5px;
+    color: #3a607d;
+}
+.page-results-see .detailed-results-card .options-list {
+    list-style: none;
+    padding: 0;
+}
+/* Options in results are not interactive */
+.page-results-see .detailed-results-card .options-list li {
+    margin-bottom: 8px;
+    padding: 8px 12px 8px 35px; /* Indent for icon space */
+    border: 1px solid #eee;
+    border-radius: 6px;
+    cursor: default; /* Not clickable */
+    position: relative; /* Needed for absolute positioned pseudo-elements */
+}
+.page-results-see .detailed-results-card .options-list li:hover {
+    background-color: transparent; /* No hover effect */
+}
+
+/* Feedback Icons using Pseudo-elements */
+.page-results-see .detailed-results-card .options-list li::before { /* Common icon position */
+     content: ''; /* Default empty */
+     position: absolute;
+     left: 10px;
+     top: 50%;
+     transform: translateY(-50%);
+     font-weight: bold;
+     font-size: 1.2em;
+}
+.page-results-see .detailed-results-card .correct-option::before {
+    content: '✓'; /* Checkmark */
+    color: green;
+}
+.page-results-see .detailed-results-card .incorrect-option::before {
+    content: '✗'; /* Cross */
+    color: red;
+}
+/* Highlight user's wrong choice */
+.page-results-see .detailed-results-card .selected-wrong {
+    background-color: #ffebee; /* Light red background */
+    border-color: #ffcdd2;
+}
+/* Style correct option slightly differently when it wasn't selected by user (optional) */
+.page-results-see .detailed-results-card .correct-option:not(.selected-wrong) {
+   /* background-color: #e8f5e9; */ /* Optional light green */
+   /* border-color: #c8e6c9; */
+}
+
+/* Skipped Question Styling */
+.page-results-see .skipped-question {
+    font-style: italic;
+    color: #6c757d; /* Gray text */
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-align: right; /* Align to the right */
+}
+.page-results-see .skipped-question.timeout-header { /* For "Time Out" text */
+    color: #dc3545; /* Make timeout red */
+    font-weight: bold;
+}
+
+/* Navigation card at the bottom of results */
+.page-results-see .navigation-card {
+    /* Inherits base card styles */
+}
+.page-results-see .navigation-card .button-container {
+    display: flex;
+    justify-content: center; /* Center buttons */
+    gap: 20px;
+}
+/* Use primary/secondary styles */
+.page-results-see .navigation-card a.button-primary { /* Try Again */
+     background-color: #007bff;
+     color: white;
+}
+.page-results-see .navigation-card a.button-primary:hover { background-color: #0056b3; }
+.page-results-see .navigation-card a.button-secondary { /* Go Home */
+      background-color: #6c757d;
+      color: white;
+}
+.page-results-see .navigation-card a.button-secondary:hover { background-color: #5a6268; }
 
 
-/* ====== End of Styles to Add/Replace ====== */
+/* --- 6. Responsive Adjustments --- */
+@media (max-width: 600px) {
+    body { padding: 10px; }
+    .container, .setup-container { margin: 10px auto; padding: 0 5px; }
+    .card, .page-setup-see .setup-container { padding: 15px; }
+
+    h1, .page-setup-see h1 { font-size: 1.5rem; margin-bottom: 20px; }
+    h2, .page-setup-see h2 { font-size: 1.1rem; }
+
+    .page-quiz-see .quiz-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+
+    /* Stack buttons in results nav */
+    .page-results-see .navigation-card .button-container { flex-direction: column; }
+    .page-results-see .navigation-card .button-container a { width: 100%; }
+
+     /* Adjust setup subject checkboxes */
+     .page-setup-see .subject-selection { gap: 10px; }
+     .page-setup-see .subject-selection label { padding: 6px 10px; }
+
+     /* Adjust popup size/position maybe */
+     .popup { width: 90%; top: 25%; }
+        }
