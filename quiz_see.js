@@ -259,21 +259,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function updateDisplay() {
              const now = Date.now();
+             // Calculate remaining time based on current time and target end time
              const secondsRemaining = Math.max(0, Math.round((quizEndTime - now) / 1000));
 
              if (timerDisplay) {
                  timerDisplay.textContent = formatTimeMMSS(secondsRemaining * 1000); // Use utility
              }
 
+             // Check if time is up AND quiz hasn't already been submitted
              if (secondsRemaining <= 0 && !isQuizSubmitted) {
                  console.log("Timer reached zero.");
-                 clearInterval(quizTimerInterval);
+                 clearInterval(quizTimerInterval); // Stop the interval
                  timeRanOut = true;
                  finalizeQuiz(); // End the quiz automatically
              }
         }
 
-        updateDisplay(); // Show initial time
+        // Ensure previous timer is cleared if this function is somehow called again
+        if (quizTimerInterval) clearInterval(quizTimerInterval);
+
+        updateDisplay(); // Show initial time immediately
         quizTimerInterval = setInterval(updateDisplay, 1000); // Update every second
     }
 
@@ -289,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (questionBlock && questionBlock.dataset.index !== undefined) {
             const questionIndex = parseInt(questionBlock.dataset.index, 10);
             userAnswers[questionIndex] = selectedRadio.value; // Store the selected option value
-            // console.log(`Answer recorded for Q${questionIndex}:`, userAnswers[questionIndex]); // Debug log
+            console.log(`Answer recorded for Q${questionIndex}:`, userAnswers[questionIndex]); // Debug log
         } else {
              console.error("Could not determine question index for answer:", selectedRadio);
         }
@@ -322,9 +327,9 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(quizTimerInterval);
         console.log("Timer stopped.");
 
-        // 2. Calculate Time Taken
+        // 2. Calculate Time Taken - Use start time and current time
         const quizEndTimeActual = Date.now();
-        // If time ran out, use the full duration. Otherwise, use actual time elapsed.
+        // If timeRanOut flag is set, time taken is the full duration. Otherwise, calculate elapsed.
         const timeTakenMs = timeRanOut ? (quizSettings.timeLimit * 60 * 1000) : (quizEndTimeActual - quizStartTime);
         console.log(`Time taken: ${timeTakenMs} ms. Time ran out: ${timeRanOut}`);
 
@@ -340,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`Calculated Score: ${score} / ${quizQuestions.length}`);
 
         // 4. Prepare Results Data
-        // Create a clean version of questions for storage (avoiding circular refs if any DOM elements were somehow attached)
+        // Create a clean version of questions for storage
         const questionsForStorage = quizQuestions.map(({ quizIndex, subject, question, options, answer }) => ({
             quizIndex, subject, question, options, answer
         }));
@@ -354,28 +359,57 @@ document.addEventListener('DOMContentLoaded', () => {
             timeRanOut: timeRanOut,            // Boolean flag
             settings: quizSettings             // Include original settings for context
         };
-        console.log("Results data prepared:", resultsData);
+
+        // ***** START OF DEBUG LOGS (Quiz Page - Finalization) *****
+        console.log("--- Preparing to save Results Data ---");
+        try {
+            console.log("Score:", resultsData.score);
+            console.log("Total Questions:", resultsData.totalQuestions);
+            console.log("Time Taken (ms):", resultsData.timeTaken);
+            console.log("Time Ran Out:", resultsData.timeRanOut);
+            // Safely log user answers (can be large)
+            console.log("User Answers (keys):", Object.keys(resultsData.userAnswers || {}));
+            console.log("Quiz Questions (count):", resultsData.quizQuestions ? resultsData.quizQuestions.length : 'N/A');
+            console.log("Settings:", resultsData.settings);
+            // Log the whole object structure check
+             console.log("Full resultsData structure check:",
+              'score' in resultsData,
+              'totalQuestions' in resultsData,
+              'timeTaken' in resultsData,
+              'userAnswers' in resultsData,
+              'quizQuestions' in resultsData,
+              'timeRanOut' in resultsData,
+              'settings' in resultsData
+            );
+        } catch(e) { console.error("Error logging resultsData parts:", e); }
+        console.log("------------------------------------");
+        // ***** END OF DEBUG LOGS (Quiz Page - Finalization) *****
+
 
         // 5. Save Results to Local Storage
-        const saved = saveToLocalStorage(STORAGE_KEYS.QUIZ_RESULTS, resultsData);
+        console.log(`Attempting to save results with key: ${STORAGE_KEYS.QUIZ_RESULTS}`);
+        const saved = saveToLocalStorage(STORAGE_KEYS.QUIZ_RESULTS, resultsData); // This function already has logs
 
-        // 6. Redirect to Results Page (even if save failed, maybe show error there)
+        // 6. Redirect and Cleanup
         if (!saved) {
-            console.error("Failed to save results to localStorage!");
-            // Maybe set a flag for the results page to show a warning?
-            // Or just proceed and hope the results page handles missing data.
-            alert("Warning: Could not save your quiz results properly. Proceeding to results page anyway.");
+            console.error("FAILED TO SAVE RESULTS TO LOCALSTORAGE!");
+            // Give user more prominent feedback
+            alert("CRITICAL WARNING: Could not save your quiz results! The results page will likely be empty or show errors. Please check if your browser allows localStorage.");
         } else {
-             console.log("Results saved successfully.");
+             console.log("Results appear to have saved successfully.");
         }
-         // --- Important: Clear the settings after successful submission to prevent re-using old settings ---
+         // Clear the settings from storage AFTER attempting to save results
+         console.log(`Attempting to remove settings with key: ${STORAGE_KEYS.QUIZ_SETTINGS}`);
          removeFromLocalStorage(STORAGE_KEYS.QUIZ_SETTINGS);
-         console.log("Quiz settings cleared from storage.");
 
 
-        console.log("Redirecting to results page...");
-        window.location.href = 'results_see.html';
-    }
+        console.log("Proceeding to redirect to results page...");
+        // Use timeout to allow console messages to flush before redirect
+        setTimeout(() => {
+             window.location.href = 'results_see.html';
+        }, 100); // Short delay
+
+    } // End finalizeQuiz
 
     // --- Start the Quiz ---
     initializeQuiz();
