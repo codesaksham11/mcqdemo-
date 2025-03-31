@@ -473,6 +473,7 @@ function displayResults() {
          showDetailsButton.addEventListener('click', () => {
              renderDetailedResults(results); // Pass full results data
              detailedResultsContainer.style.display = 'block'; // Show details section
+             
                   showDetailsButton.style.display = 'none'; // Hide the button itself
          });
     } else if (detailedResultsContainer && !showDetailsButton) {
