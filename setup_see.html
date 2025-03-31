@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEE Quiz Setup</title>
+    <link rel="stylesheet" href="style_see.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card setup-card">
+            <h1>SEE Quiz Setup</h1>
+            <form id="setup-form">
+                <!-- Time Limit Input -->
+                <div class="form-group">
+                    <label for="time-limit">Set Time Limit (minutes):</label>
+                    <input type="number" id="time-limit" name="timeLimit" placeholder="Minutes (1-180)">
+                    <div class="error-message" id="time-error"></div> <!-- Error message area -->
+                </div>
+
+                <!-- Number of Questions Input -->
+                <div class="form-group">
+                    <label for="num-questions">Number of Questions:</label>
+                    <input type="number" id="num-questions" name="numQuestions" placeholder="Number (10-100)">
+                    <div class="error-message" id="questions-error"></div> <!-- Error message area -->
+                </div>
+
+                <!-- Subject Selection -->
+                <div class="form-group">
+                    <fieldset>
+                        <legend>Select Subjects:</legend>
+                        <div>
+                            <input type="checkbox" id="subject-science" name="subject" value="Science">
+                            <label for="subject-science">Science</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="subject-social" name="subject" value="Social">
+                            <label for="subject-social">Social Studies</label>
+                        </div>
+                        <div class="error-message" id="subject-error"></div> <!-- Error message area -->
+                    </fieldset>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="button-container setup-buttons">
+                    <button type="submit" class="button button-primary">Start Quiz</button>
+                    <a href="index.html" class="button button-secondary">Back to Home</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Simple Pop-up Modal for General Errors (Initially Hidden) -->
+    <div id="error-popup" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" onclick="document.getElementById('error-popup').style.display='none'">×</span>
+            <p id="popup-message">Please correct the errors before starting.</p>
+        </div>
+    </div>
+
+
+    <script src="script_see.js"></script> <!-- Link to main JS -->
+</body>
+</html>
