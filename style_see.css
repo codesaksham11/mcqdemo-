@@ -1,0 +1,351 @@
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body Styling */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f7f6; /* Light grayish background */
+    color: #333;
+    padding: 20px;
+}
+
+/* Centered Container */
+.container {
+    max-width: 800px; /* Max width for content */
+    margin: 20px auto; /* Center container */
+    padding: 0 15px; /* Padding on smaller screens */
+}
+
+/* Card Styling (White Curved Box) */
+.card {
+    background-color: #ffffff;
+    border-radius: 12px; /* Curved corners */
+    padding: 25px 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+    border: 1px solid #e0e0e0; /* Light border */
+}
+
+/* Headings */
+h1, h2, h3 {
+    margin-bottom: 15px;
+    color: #0056b3; /* A professional blue */
+}
+h1 { font-size: 1.8em; }
+h2 { font-size: 1.5em; }
+
+/* Paragraphs */
+p {
+    margin-bottom: 15px;
+}
+
+/* Button Styling */
+.button-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+    gap: 15px; /* Space between buttons */
+    margin-top: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.button-primary {
+    background-color: #007bff; /* Primary blue */
+    color: white;
+}
+.button-primary:hover {
+    background-color: #0056b3;
+}
+
+.button-secondary {
+    background-color: #6c757d; /* Gray */
+    color: white;
+}
+.button-secondary:hover {
+    background-color: #5a6268;
+}
+
+.button-disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+.button-disabled:hover {
+    transform: none; /* No hover effect */
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label, .form-group legend {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input[type="number"],
+.form-group input[type="text"] { /* Added text just in case */
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+}
+
+.form-group input[type="number"]:focus,
+.form-group input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form-group fieldset {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+.form-group fieldset div {
+    margin-bottom: 8px; /* Space between checkboxes */
+}
+
+.form-group input[type="checkbox"] {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+.form-group fieldset label { /* Label next to checkbox */
+    display: inline-block;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+/* Error Message Styling */
+.error-message {
+    color: #dc3545; /* Red for errors */
+    font-size: 0.9em;
+    margin-top: 5px;
+    min-height: 1.2em; /* Reserve space to prevent layout jumps */
+}
+
+/* Pop-up Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 25px 30px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 400px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Quiz Page Specifics */
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px 20px; /* Slightly less padding than main card */
+}
+.timer-container {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #dc3545; /* Red timer */
+}
+
+.quiz-question-block {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee; /* Separator */
+}
+.quiz-question-block:last-child {
+    border-bottom: none;
+}
+
+.question-subject-header {
+    font-size: 1.3em;
+    color: #0056b3;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    display: inline-block; /* Fit content width */
+}
+
+.question-text {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.options-list {
+    list-style: none;
+    padding: 0;
+}
+
+.options-list li {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    cursor: pointer; /* Indicate clickable */
+    transition: background-color 0.2s ease;
+}
+.options-list li:hover {
+    background-color: #f0f8ff; /* Light blue on hover */
+}
+
+.options-list input[type="radio"] {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.options-list label {
+    vertical-align: middle;
+    cursor: pointer; /* Match li cursor */
+}
+
+
+/* Results Page Specifics */
+#summary p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+#summary strong {
+    color: #0056b3;
+}
+
+#detailed-results .quiz-question-block { /* Reuse quiz question block styling */
+    border-bottom: 1px dashed #ccc; /* Dashed separator in results */
+}
+#detailed-results .options-list li {
+    cursor: default; /* Not clickable in results */
+    position: relative; /* For positioning ticks */
+    padding-right: 30px; /* Space for ticks */
+}
+#detailed-results .options-list li:hover {
+    background-color: transparent; /* No hover effect in results */
+}
+
+/* Tick/Cross Styling (using pseudo-elements) */
+.correct-option::after {
+    content: '✓';
+    color: green;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.incorrect-option::after {
+    content: '✗';
+    color: red;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Style for the chosen (but wrong) option */
+.selected-wrong {
+    background-color: #ffebee; /* Light red background */
+}
+/* Style for the correct option when not selected */
+.correct-unselected {
+   /* Maybe a light green background or just the tick is enough */
+   /* background-color: #e8f5e9; */
+}
+
+.skipped-question {
+    font-style: italic;
+    color: #6c757d; /* Gray text for skipped */
+    margin-top: 5px;
+}
+.timeout-header { /* For "Time Out" text on skipped questions in results */
+    color: red;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+
+
+/* Responsive adjustments (Example) */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        margin: 10px auto;
+        padding: 0 10px;
+    }
+    .card {
+        padding: 20px;
+    }
+    h1 { font-size: 1.6em; }
+    h2 { font-size: 1.3em; }
+
+    .button-container {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px;
+    }
+    .button {
+        width: 100%; /* Make buttons full width */
+    }
+
+    .quiz-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
